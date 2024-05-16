@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "nofortunechest",
+  "version": "${version}",
+  "name": "NoFortuneChest",
+  "description": "Displays a warning before you break your Ender Chest in to Obsidian!",
+  "authors": [
+    "TheVoidBlock"
+  ],
+  "contact": {
+    "homepage": "modrinth.com/mod/NoFortuneChest",
+    "sources": "https://github.com/thevoidblock/NoFortuneChest",
+    "issues": "https://github.com/thevoidblock/NoFortuneChest/issues"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/nofortunechest/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.thevoidblock.nofortunechest.client.NoFortuneChestClient"
+    ],
+    "main": [
+      "com.thevoidblock.nofortunechest.NoFortuneChest"
+    ],
+    "modmenu": [
+      "com.thevoidblock.nofortunechest.ModMenuIntegration"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

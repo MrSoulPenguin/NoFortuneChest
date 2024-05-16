@@ -1,0 +1,25 @@
+{
+  "nofortunechestconfig.nofortunechest.config": "No Fortune Chest Config",
+
+  "category.nofortunechest.general": "General",
+
+  "option.nofortunechest.mod_toggle": "Mod Enabled",
+
+
+  "option.nofortunechest.warning_toggle": "Action Bar Warning",
+
+  "option.nofortunechest.warning_message": "Action Bar Warning Message",
+  "tooltip.nofortunechest.warning_message": "Sets the action bar warning message",
+
+  "option.nofortunechest.warning_color": "Action Bar Warning Color",
+  "tooltip.nofortunechest.warning_color": "Sets the action bar warning color",
+
+
+  "option.nofortunechest.title_toggle": "Title Warning",
+
+  "option.nofortunechest.title_message": "Title Warning Message",
+  "tooltip.nofortunechest.title_message": "Sets the Title warning message",
+
+  "option.nofortunechest.title_color": "Title Warning Color",
+  "tooltip.nofortunechest.title_color": "Sets the Title warning color"
+}
