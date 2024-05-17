@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 
 public class NonSilkWarning {
 
@@ -41,7 +42,13 @@ public class NonSilkWarning {
                     }
                 });
 
-                BlockHitResult result = (BlockHitResult) client.crosshairTarget;
+                BlockHitResult result = null;
+
+                if(
+                        client.crosshairTarget != null &&
+                        client.crosshairTarget.getType() == HitResult.Type.BLOCK
+                ) result = (BlockHitResult) client.crosshairTarget;
+
                 if (
                         !isSuitable.silk && isSuitable.pickaxe &&
                         result != null && result.getType() == BlockHitResult.Type.BLOCK &&
