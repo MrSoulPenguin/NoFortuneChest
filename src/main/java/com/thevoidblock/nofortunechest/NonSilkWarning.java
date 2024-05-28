@@ -3,11 +3,15 @@ package com.thevoidblock.nofortunechest;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
+
+import java.util.Set;
 
 public class NonSilkWarning {
 
@@ -23,22 +27,22 @@ public class NonSilkWarning {
             ) {
 
                 var isSuitable = new Object(){
-                    boolean silk = false;
-                    boolean pickaxe = false;
+                    boolean value = true;
                 };
 
                 client.player.getHandItems().forEach(itemStack -> {
-                    itemStack.getEnchantments().forEach(nbtElement -> {
-                        if(
-                                ((NbtCompound)nbtElement).get("id").asString().equals("minecraft:silk_touch")
-                        ) isSuitable.silk = true;
-                    });
+
+                    Set<RegistryEntry<Enchantment>> enchantments = itemStack.getEnchantments().getEnchantments();
+                    Item item = itemStack.getItem();
 
                     if(
-                            itemStack.getItem().equals(Items.NETHERITE_PICKAXE) ||
-                                    itemStack.getItem().equals(Items.DIAMOND_PICKAXE)
+                            (
+                                item.equals(Items.NETHERITE_PICKAXE) ||
+                                item.equals(Items.DIAMOND_PICKAXE)
+                            ) &&
+                                    enchantments.stream().noneMatch(enchantmentRegistryEntry -> enchantmentRegistryEntry.getKey().get().getValue().getPath().equalsIgnoreCase("silk_touch"))
                     ) {
-                        isSuitable.pickaxe = true;
+                        isSuitable.value = false;
                     }
                 });
 
@@ -50,7 +54,7 @@ public class NonSilkWarning {
                 ) result = (BlockHitResult) client.crosshairTarget;
 
                 if (
-                        !isSuitable.silk && isSuitable.pickaxe &&
+                        !isSuitable.value &&
                         result != null && result.getType() == BlockHitResult.Type.BLOCK &&
                         client.world.getBlockState(result.getBlockPos()).getBlock() == Blocks.ENDER_CHEST
                 ) {
